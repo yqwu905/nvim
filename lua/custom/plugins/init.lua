@@ -6,11 +6,6 @@ return {
   {"skywind3000/asyncrun.vim"},
   {"rhysd/accelerated-jk"},
   {"SirVer/ultisnips", after='nvim-cmp'},
-  {
-    "quangnguyen30192/cmp-nvim-ultisnips",
-    config = function()
-      require("cmp_nvim_ultisnips").setup{}
-    end
-  },
-  {"lervag/vimtex", ft={"plaintex", "tex", "latex"}}
+  {"lervag/vimtex", ft={"plaintex", "tex", "latex"}},
+  {"hrsh7th/nvim-cmp", config = require("custom.plugins.nvim_cmp")},
 }

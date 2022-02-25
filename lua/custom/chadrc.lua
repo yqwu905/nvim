@@ -22,6 +22,7 @@ M.plugins = {
   default_plugins_remove = {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/nvim-cmp",
   },
 
   default_plugin_config_replace = {

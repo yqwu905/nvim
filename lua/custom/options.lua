@@ -1,7 +1,21 @@
-local M = {}
-
-M.setup = function(domain, key, value)
+local setup = function(domain, key, value)
   vim[domain][key] = value
 end
 
-return M
+setup("o", "shell", "zsh")
+setup("o", "tabstop", 2)
+vim.cmd("set relativenumber")
+
+vim.g.clipboard = {
+  name = "win32yank-wsl",
+  copy = {
+    ["+"] = "win32yank.exe -i --crlf",
+    ["*"] = "win32yank.exe -i --crlf"
+  },
+  paste = {
+    ["+"] = "win32yank.exe -o --lf",
+    ["*"] = "win32yank.exe -o --lf"
+  },
+  cache_enabled = 0
+}
+
