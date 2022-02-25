@@ -1,3 +1,4 @@
+require("custom.utils")
 local map = require("core.utils").map
 
 vim.cmd("nnoremap <silent> <leader> :WhichKey '<Space>'<CR>")
@@ -15,7 +16,18 @@ map("n", "<leader>7", ":BufferLineGoToBuffer 7<CR>")
 map("n", "<leader>8", ":BufferLineGoToBuffer 8<CR>")
 map("n", "<leader>9", ":BufferLineGoToBuffer 9<CR>")
 
-vim.cmd[[
+map("n", "<leader>mr", ":lua AsyncRunCode()<CR>")
+map("n", "<leader>mc", ":lua SwitchConcealLevel()<CR>")
+
+map("n", "<A-i>", ":lua require('FTerm').toggle()<CR>")
+map("t", "<A-i>", "<C-\\><C-n>:lua require('FTerm').toggle()<CR>")
+
+map("n", "<leader>tw", ":lua __fterm_wolfram()<CR>")
+map("n", "<leader>tt", ":lua __fterm_btop()<CR>")
+map("n", "<leader>tj", ":lua __fterm_julia()<CR>")
+map("n", "<leader>tp", ":lua __fterm_python()<CR>")
+
+vim.cmd [[
   nmap ; <Plug>(eft-repeat)
   xmap ; <Plug>(eft-repeat)
   omap ; <Plug>(eft-repeat)
@@ -35,9 +47,8 @@ vim.cmd[[
   omap T <Plug>(eft-T)
 ]]
 
-vim.cmd[[
+vim.cmd [[
   nmap j <Plug>(accelerated_jk_gj)
   nmap k <Plug>(accelerated_jk_gk)
 ]]
-
 
