@@ -24,6 +24,19 @@ M.plugins = {
                 "lua", "fortran", "html", "python", "yaml", "markdown"
             }
         },
+        nvim_tree = {
+          actions = {
+            open_file = {
+              window_picker = {
+                exclued = {
+                  filetype = { "notify", "packer", "qf" },
+                  buftype = { "terminal" },
+                }
+              },
+              quit_on_open = 0
+            }
+          }
+        }
     }
 }
 
