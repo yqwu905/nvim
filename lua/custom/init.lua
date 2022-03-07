@@ -2,8 +2,8 @@
 -- This is an example init file in /lua/custom/
 -- this init.lua can load stuffs etc too so treat it like your ~/.config/nvim/
 
-require("custom.events")
 require("custom.options")
+require("custom.events")
 require("custom.mappings")
 
 -- MAPPINGS

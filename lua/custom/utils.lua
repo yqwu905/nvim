@@ -29,7 +29,7 @@ _G.AsyncRunCode = function()
     elseif vim.bo.filetype == 'julia' then
         vim.cmd('AsyncRun -mode=term -pos=bottom julia ' .. vim.fn.expand('%'))
     elseif vim.bo.filetype == 'tex' then
-        vim.notify("Compling latex file.")
+        require('notify')("Compling latex file.")
         vim.cmd('AsyncRun latexmk -xelatex ' .. vim.fn.expand('%'))
     end
 end
@@ -44,6 +44,7 @@ _G.__fterm_wolfram = function() wolfram_term:toggle() end
 _G.__fterm_btop = function() btop_term:toggle() end
 _G.__fterm_julia = function() julia_term:toggle() end
 _G.__fterm_python = function() python_term:toggle() end
+_G.Diffviewopen = 0
 
 _G.SwitchConcealLevel = function()
     if vim.o.conceallevel ~= 0 then
@@ -51,4 +52,44 @@ _G.SwitchConcealLevel = function()
     else
         vim.o.conceallevel = 2
     end
+end
+
+_G.ToggleDiffView = function(isdir)
+  if isdir then
+    if Diffviewopen==0 then
+      vim.cmd("DiffviewFileHistory .")
+      Diffviewopen = 1
+    else
+      vim.cmd("DiffviewClose")
+      Diffviewopen = 0
+    end
+  else
+    if Diffviewopen==0 then
+      vim.cmd("DiffviewFileHistory")
+      Diffviewopen = 1
+    else
+      vim.cmd("DiffviewClose")
+      Diffviewopen = 0
+    end
+  end
+end
+
+_G.MarpPreviewOn = 0
+_G.ToggleMarkdownPreview = function()
+  local marp_path = vim.api.nvim_buf_get_name(0)
+  local extension = marp_path:match("^.+%.(.+)$")
+  if extension=='md' then
+    vim.cmd('MarkdownPreview')
+  elseif extension=='marp' then
+    if MarpPreviewOn==0 then
+      require('notify')("Start MARP Preview")
+      vim.cmd('AsyncRun marp -w ' .. marp_path)
+      vim.cmd(':silent exec "!firefox.exe file://///wsl.localhost/Arch/' .. marp_path:match("^(.+%.).+$") .. "html\"")
+      MarpPreviewOn = 1
+    else
+      require('notify')("Stop MARP Preview")
+      vim.cmd('AsyncStop')
+      MarpPreviewOn = 0
+    end
+  end
 end

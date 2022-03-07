@@ -153,7 +153,7 @@ local plugins = {
    {
       "hrsh7th/cmp-nvim-lua",
       disable = not plugin_settings.status.cmp,
-      after = "cmp_luasnip",
+      after = "ultisnips",
    },
 
    {

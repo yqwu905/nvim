@@ -27,6 +27,15 @@ map("n", "<leader>tt", ":lua __fterm_btop()<CR>")
 map("n", "<leader>tj", ":lua __fterm_julia()<CR>")
 map("n", "<leader>tp", ":lua __fterm_python()<CR>")
 
+-- Git diff keymap
+map("n", "<leader>gdf", ":lua ToggleDiffView(false)<CR>")
+map("n", "<leader>gdd", ":lua ToggleDiffView(true)<CR>")
+map("n", "<leader>gdc", ":DiffviewClose<CR>")
+
+-- MARP keymap
+
+vim.cmd('au FileType markdown map <silent> <leader>mp :lua ToggleMarkdownPreview()<CR>')
+
 vim.cmd [[
   nmap ; <Plug>(eft-repeat)
   xmap ; <Plug>(eft-repeat)
