@@ -33,7 +33,7 @@ M.plugins = {
                   buftype = { "terminal" },
                 }
               },
-              quit_on_open = 0
+              quit_on_open = false
             }
           }
         }
