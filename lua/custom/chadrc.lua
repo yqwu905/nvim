@@ -21,7 +21,7 @@ M.plugins = {
         nvim_treesitter = {
             ensure_installed = {
                 "c", "cpp", "cmake", "julia", "json", "haskell", "php", "perl",
-                "lua", "fortran", "html", "python", "yaml", "markdown"
+                "lua", "fortran", "html", "python", "yaml", "markdown", "bash"
             }
         },
         nvim_tree = {
