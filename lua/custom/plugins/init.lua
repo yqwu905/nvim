@@ -1,5 +1,11 @@
 return {
-    {"iamcco/markdown-preview.nvim", ft = {"markdown"}},
+    {
+      "iamcco/markdown-preview.nvim",
+      ft = {"markdown"},
+      -- config = function()
+      --   vim.g.mkdp_markdown_css = '/home/yqwu/.config/nvim/static/markdown.css'
+      -- end
+    },
     {"liuchengxu/vim-which-key"},
     {"hrsh7th/vim-eft"},
     {"numToStr/FTerm.nvim", config = require("custom.plugins.FTerm")},

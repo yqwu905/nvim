@@ -17,20 +17,21 @@ function AsyncRunCPP()
 end
 
 _G.AsyncRunCode = function()
+    local path = '"' .. vim.fn.expand('%') .. '"'
     if vim.bo.filetype == 'cpp' then
         AsyncRunCPP();
         -- vim.cmd("AsyncRun -mode=term -pos=bottom g++ -std=c++11 -o a.out " ..
         --             vim.fn.expand("%") .. "&&./a.out")
     elseif vim.bo.filetype == 'python' then
-        vim.cmd('AsyncRun -mode=term -pos=bottom python ' .. vim.fn.expand('%'))
+        vim.cmd('AsyncRun -mode=term -pos=bottom python ' .. path)
     elseif vim.bo.filetype == 'mma' then
         vim.cmd('AsyncRun -mode=term -pos=bottom wolframscript -f ' ..
                     vim.fn.expand('%'))
     elseif vim.bo.filetype == 'julia' then
-        vim.cmd('AsyncRun -mode=term -pos=bottom julia ' .. vim.fn.expand('%'))
+        vim.cmd('AsyncRun -mode=term -pos=bottom julia ' .. path)
     elseif vim.bo.filetype == 'tex' then
         require('notify')("Compling latex file.")
-        vim.cmd('AsyncRun latexmk -xelatex ' .. vim.fn.expand('%'))
+        vim.cmd('AsyncRun latexmk -xelatex ' .. path)
     end
 end
 
