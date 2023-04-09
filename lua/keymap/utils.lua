@@ -338,14 +338,5 @@ function utils.pandoc_export()
   end)
 end
 
-local Terminal = require("toggleterm.terminal").Terminal
-local chatgpt = Terminal:new {
-  cmd = "python D:\\repos\\chatgpt\\main.py",
-  count = 9,
-}
-function utils.chatgpt()
-  chatgpt:toggle()
-end
-
 return utils
 

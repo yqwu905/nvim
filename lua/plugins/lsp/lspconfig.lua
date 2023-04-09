@@ -1,5 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
+  ft = { "lua", "c", "cpp", "python", "rust", "typescript", "cmake", "ps1" },
+  dependencies = {
+    { "glepnir/lspsaga.nvim" },
+  },
   config = function()
     local servers = {
       lua_ls = {
@@ -40,12 +44,12 @@ return {
       pyright = {},
       emmet_ls = {},
       html = {
-          init_options = {
-              provideFormatter = true
-          }
+        init_options = {
+          provideFormatter = true,
+        },
       },
       tsserver = {},
-      ["rust_analyzer"] = {}
+      ["rust_analyzer"] = {},
     }
 
     local lspconfig = require "lspconfig"
@@ -130,4 +134,3 @@ return {
     end
   end,
 }
-

@@ -1,5 +1,6 @@
 return {
   "chentoast/marks.nvim",
+  keys = { "m", "'" },
   opts = {
     default_mappings = true,
     builtin_marks = { ".", "<", ">", "^" },
@@ -16,4 +17,3 @@ return {
     mappings = {},
   },
 }
-

@@ -74,6 +74,7 @@ wk.register {
       ["l"] = {
         i = { "<cmd>LspInfo<cr>", "LSP Info" },
         l = { "<cmd>Trouble loclist<cr>", "loclist" },
+        z = { "<cmd>Lazy<cr>", "lazy" },
       },
       ["m"] = {},
       ["n"] = {},

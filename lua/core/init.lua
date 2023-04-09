@@ -30,5 +30,4 @@ vim.cmd.colorscheme "tokyonight"
 -- 加载keymap
 require "keymap.replace"
 
-require "utils"
-
+require "core.autocmds"

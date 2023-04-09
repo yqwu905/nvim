@@ -29,5 +29,17 @@ utils.path_join = function(...)
   return table.concat(all_parts, path_sep)
 end
 
+utils.expand_tbl = function(tbl, last_tbl)
+    last_tbl = last_tbl or {}
+    for _,v in ipairs(tbl) do
+        if type(v) == 'table' then
+            last_tbl = utils.expand_tbl(v, last_tbl)
+        else
+            last_tbl.insert(v)
+        end
+    end
+    return last_tbl
+end
+
 return utils
 

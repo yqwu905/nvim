@@ -1,5 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
+  lazy = false,
   opts = function()
     local lualine = require "lualine"
         -- Color table for highlights
@@ -221,4 +222,3 @@ return {
     lualine.setup(config)
   end,
 }
-

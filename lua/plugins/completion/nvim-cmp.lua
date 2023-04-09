@@ -2,12 +2,13 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    { "FelipeLema/cmp-async-path", after = "nvim-cmp" },
-    { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
-    { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
-    { "hrsh7th/cmp-nvim-lsp", after = "nvim-lspconfig" },
-    { "quangnguyen30192/cmp-nvim-ultisnips", after = "nvim-cmp" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help", after = "nvim-cmp" },
+    { "FelipeLema/cmp-async-path" },
+    { "hrsh7th/cmp-buffer" },
+    { "hrsh7th/cmp-cmdline" },
+    { "hrsh7th/cmp-nvim-lsp" },
+    { "quangnguyen30192/cmp-nvim-ultisnips" },
+    { "hrsh7th/cmp-nvim-lsp-signature-help" },
+    { "SirVer/ultisnips" },
   },
   config = function()
     local present, cmp = pcall(require, "cmp")
