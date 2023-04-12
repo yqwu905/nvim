@@ -2,7 +2,7 @@ return {
   "neovim/nvim-lspconfig",
   ft = { "lua", "c", "cpp", "python", "rust", "typescript", "cmake", "ps1" },
   dependencies = {
-    { "glepnir/lspsaga.nvim" },
+    { "nvimdev/lspsaga.nvim", opts = {} },
   },
   config = function()
     local servers = {

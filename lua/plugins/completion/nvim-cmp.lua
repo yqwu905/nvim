@@ -2,12 +2,10 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    { "FelipeLema/cmp-async-path" },
     { "hrsh7th/cmp-buffer" },
     { "hrsh7th/cmp-cmdline" },
     { "hrsh7th/cmp-nvim-lsp" },
     { "quangnguyen30192/cmp-nvim-ultisnips" },
-    { "hrsh7th/cmp-nvim-lsp-signature-help" },
     { "SirVer/ultisnips" },
   },
   config = function()
@@ -59,7 +57,6 @@ return {
             nvim_lua = "[Lua]",
             buffer = "[BUF]",
             luasnip = "[Snip]",
-            path = "[Path]",
           })[entry.source.name]
           return vim_item
         end,
@@ -98,8 +95,6 @@ return {
         { name = "nvim_lsp" },
         { name = "buffer", keyword_length = 3 },
         { name = "nvim_lua" },
-        { name = "async_path" },
-        { name = "nvim_lsp_signature_help" },
       },
       window = {
         completion = cmp.config.window.bordered(),
@@ -118,11 +113,9 @@ return {
     })
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
-      sources = cmp.config.sources({
+      sources = cmp.config.sources {
         { name = "cmdline" },
-      }, {
-        { name = "path" },
-      }),
+      },
     })
   end,
 }

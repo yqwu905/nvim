@@ -7,28 +7,27 @@ local wk = require "which-key"
 wk.register {
   {
     ["<leader>"] = {
-      ["1"] = { "<cmd>lua require('bufferline').go_to_buffer(1, true)<cr>", "buffer 1" },
-      ["2"] = { "<cmd>lua require('bufferline').go_to_buffer(2, true)<cr>", "buffer 2" },
-      ["3"] = { "<cmd>lua require('bufferline').go_to_buffer(3, true)<cr>", "buffer 3" },
-      ["4"] = { "<cmd>lua require('bufferline').go_to_buffer(4, true)<cr>", "buffer 4" },
-      ["5"] = { "<cmd>lua require('bufferline').go_to_buffer(5, true)<cr>", "buffer 5" },
-      ["6"] = { "<cmd>lua require('bufferline').go_to_buffer(6, true)<cr>", "buffer 6" },
-      ["7"] = { "<cmd>lua require('bufferline').go_to_buffer(7, true)<cr>", "buffer 7" },
-      ["8"] = { "<cmd>lua require('bufferline').go_to_buffer(8, true)<cr>", "buffer 8" },
-      ["9"] = { "<cmd>lua require('bufferline').go_to_buffer(9, true)<cr>", "buffer 9" },
+      ["1"] = { "<cmd>BufferGoto 1<cr>", "buffer 1" },
+      ["2"] = { "<cmd>BufferGoto 2<cr>", "buffer 2" },
+      ["3"] = { "<cmd>BufferGoto 3<cr>", "buffer 3" },
+      ["4"] = { "<cmd>BufferGoto 4<cr>", "buffer 4" },
+      ["5"] = { "<cmd>BufferGoto 5<cr>", "buffer 5" },
+      ["6"] = { "<cmd>BufferGoto 6<cr>", "buffer 6" },
+      ["7"] = { "<cmd>BufferGoto 7<cr>", "buffer 7" },
+      ["8"] = { "<cmd>BufferGoto 8<cr>", "buffer 8" },
+      ["9"] = { "<cmd>BufferGoto 9<cr>", "buffer 9" },
       ["a"] = {},
       ["b"] = {
-        b = { "<cmd>Telescope buffers<cr>", "buffers" },
+        b = { "<cmd>BufferPick<cr>", "buffer pick" },
+        h = { "<cmd>BufferMovePrevious<cr>", "move left" },
+        l = { "<cmd>BufferMoveNext<cr>", "move right" },
+        p = { "<cmd>BufferPin<cr>", "buffer pin" },
       },
       ["c"] = {
         a = { "<cmd>Lspsaga code_action<cr>", "code actions" },
         c = { utils.async_check_code, "code check" },
       },
-      ["d"] = {
-        b = { "<cmd>Alpha<cr>", "dashboard" },
-        d = { "<cmd>Trouble document_diagnostics<cr>", "document" },
-        w = { "<cmd>Trouble workspace_diagnostics<cr>", "workspace" },
-      },
+      ["d"] = {},
       ["e"] = {
         c = { "<cmd>e $MYVIMRC | :cd %:p:h <CR>", "nvim config" },
         e = { "<cmd>e!<cr>", "reload" },
@@ -37,7 +36,7 @@ wk.register {
         p = { utils.pandoc_export, "export" },
       },
       ["f"] = {
-        b = { "<cmd>Telescope file_browser<cr>", "file browser" },
+        b = { "<cmd>Telescope buffers<cr>", "buffers" },
         f = { "<cmd>Telescope find_files<cr>", "find files" },
         h = { "<cmd>Telescope help_tags<cr>", "help tags" },
         g = { "<cmd>Telescope grep_string<cr>", "grep" },
@@ -52,8 +51,8 @@ wk.register {
       },
       ["g"] = {
         b = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "git blame" },
-        c = { "<cmd>Neogit commit<cr>", "commit" },
-        g = { "<cmd>Neogit<cr>", "neogit" },
+        -- c = { "<cmd>Neogit commit<cr>", "commit" },
+        -- g = { "<cmd>Neogit<cr>", "neogit" },
         h = { "<cmd>Telescope git_commits<cr>", "git history" },
         j = { "<cmd>Gitsigns next_hunk<cr>", "next hunk" },
         k = { "<cmd>Gitsigns prev_hunk<cr>", "previous hunk" },
@@ -73,7 +72,6 @@ wk.register {
       ["k"] = {},
       ["l"] = {
         i = { "<cmd>LspInfo<cr>", "LSP Info" },
-        l = { "<cmd>Trouble loclist<cr>", "loclist" },
         z = { "<cmd>Lazy<cr>", "lazy" },
       },
       ["m"] = {},
@@ -85,7 +83,6 @@ wk.register {
         "preview",
       },
       ["q"] = {
-        f = { "<cmd>Trouble quickfix<cr>", "quickfix" },
         q = { "<cmd>wqa<cr>", "quit all" },
       },
       ["r"] = {
@@ -101,15 +98,16 @@ wk.register {
         d = { "<cmd>TodoTelescope<cr>", "todo" },
         m = { "<cmd>TableModeToggle<cr>", "table mode" },
         p = { "<cmd>TransparentToggle<cr>", "transparent" },
-        t = { "<cmd>TroubleToggle<cr>", "toggle trouble" },
-        r = { "<cmd>TroubleRefresh<cr>", "refresh" },
+        r = {},
         s = {
           name = "+treesitter",
           h = { "<cmd>TSToggle highlight<cr>", "highlight" },
           i = { "<cmd>TSToggle indent<cr>", "indent" },
         },
       },
-      ["u"] = {},
+      ["u"] = {
+        x = { "<cmd>BufferRestore<cr>", "restore buffer" },
+      },
       ["v"] = {},
       ["w"] = {
         ["v"] = { "<cmd>vsp<cr>", "vsp" },
@@ -143,8 +141,8 @@ end
 
 nmap("<enter>", utils.follow_link)
 nmap("<bs>", utils.jump_back)
-nmap("<tab>", "<cmd>BufferLineCycleNext<CR>")
-nmap("<s-tab>", "<cmd>BufferLineCyclePrev<cr>")
+nmap("<tab>", "<cmd>BufferNext<CR>")
+nmap("<s-tab>", "<cmd>BufferPrevious<cr>")
 nmap("<c-n>", "<cmd>NvimTreeToggle<cr>")
 nmap("<c-s>", "<cmd>update<cr>")
 nmap("<c-h>", "<c-w>h")
@@ -154,8 +152,6 @@ nmap("<c-l>", "<c-w>l")
 nmap("<a-i>", "<cmd>ToggleTerm direction=float<cr>")
 nmap("<a-h>", "<cmd>ToggleTerm direction=horizontal<cr>")
 nmap("<a-v>", "<cmd>ToggleTerm direction=vertical<cr>")
-nmap("<a-c>", "<cmd>Chat<cr>")
-nmap("s", "<cmd>HopWord<cr>")
 nmap("<esc>", "<cmd>noh<cr>")
 tmap("<esc>", "<c-\\><c-n>")
 tmap("<a-i>", "<cmd>ToggleTerm direction=float<cr>")
@@ -165,5 +161,7 @@ imap("<c-s>", "<c-o><cmd>update<cr>")
 imap("<a-i>", "<cmd>ToggleTerm direction=float<cr>")
 imap("<a-h>", "<cmd>ToggleTerm direction=horizontal<cr>")
 imap("<a-v>", "<cmd>ToggleTerm direction=vertical<cr>")
-vmap("<leader>ss", "<cmd>ToggleTermSendVisualSelection 9<cr>")
-vmap("<leader>sl", "<cmd>ToggleTermSendVisualLines 9<cr>")
+imap("<c-h>", "<left>")
+imap("<c-j>", "<down>")
+imap("<c-k>", "<up>")
+imap("<c-l>", "<right>")

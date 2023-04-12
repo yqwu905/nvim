@@ -2,15 +2,15 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
   dependencies = {
+    { "nvim-telescope/telescope-project.nvim" },
     {
-      "nvim-telescope/telescope-project.nvim",
-      "nvim-telescope/telescope-file-browser.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
     },
   },
   config = function()
     local telescope = require "telescope"
     local actions = telescope.actions
-    local trouble = require "trouble.providers.telescope"
     telescope.setup {
       defaults = {
         vimgrep_arguments = {
@@ -21,10 +21,6 @@ return {
           "--line-number",
           "--column",
           "--smart-case",
-        },
-        mappings = {
-          i = { ["<c-q>"] = trouble.open_with_trouble },
-          n = { ["<c-q>"] = trouble.open_with_trouble },
         },
         prompt_prefix = "   ",
         selection_caret = "  ",
@@ -46,9 +42,7 @@ return {
           height = 0.80,
           preview_cutoff = 120,
         },
-        file_sorter = require("telescope.sorters").get_fuzzy_file,
         file_ignore_patterns = { "node_modules" },
-        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         path_display = function(opts, path)
           local tail = require("telescope.utils").path_tail(path)
           return string.format("%s - (%s)", tail, path)
@@ -67,15 +61,16 @@ return {
       },
       extensions = {
         project = {},
-        ["ui-select"] = {},
-        file_browser = {
-          theme = "ivy",
-          hijack_netrw = true,
+        fzf = {
+          fuzzy = true, -- false will only do exact matching
+          override_generic_sorter = true, -- override the generic sorter
+          override_file_sorter = true, -- override the file sorter
+          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
       },
     }
 
-    local extensions = { "project", "file_browser" }
+    local extensions = { "project", "fzf" }
 
     pcall(function()
       for _, ext in ipairs(extensions) do
@@ -84,4 +79,3 @@ return {
     end)
   end,
 }
-

@@ -25,7 +25,7 @@ require "core.options"
 local lazy = require "core.lazy"
 lazy:load_plugins()
 lazy:start()
-vim.cmd.colorscheme "tokyonight"
+vim.cmd.colorscheme "tokyonight-day"
 
 -- 加载keymap
 require "keymap.replace"
