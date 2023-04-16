@@ -28,6 +28,6 @@ lazy:start()
 vim.cmd.colorscheme "tokyonight-day"
 
 -- 加载keymap
-require "keymap.replace"
+require "keymap"
 
 require "core.autocmds"

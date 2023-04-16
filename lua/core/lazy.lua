@@ -14,6 +14,7 @@ end
 -- Please place one plugin into one seperate lua file and group them by folder.
 function lazy:load_plugins()
   local plugins_dir = utils.path_join(vim.fn.stdpath "config", "lua", "plugins")
+  plugins_dir = vim.fs.normalize(plugins_dir)
   self.repos = {}
   function lua_match(path)
     return path:sub(#path - 3, #path) == ".lua"

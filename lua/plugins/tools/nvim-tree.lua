@@ -1,11 +1,7 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  cmd = { "NvimTreeToggle", "NvimTreeClose", "NvimTreeToggle" },
+  cmd = { "NvimTreeToggle", "NvimTreeClose", "NvimTreeFocus" },
   opts = {
-    filters = {
-      dotfiles = false,
-      exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
-    },
     disable_netrw = true,
     hijack_netrw = true,
     hijack_cursor = true,
@@ -16,14 +12,14 @@ return {
       update_root = false,
     },
     view = {
-      adaptive_size = false,
+      adaptive_size = true,
       side = "left",
       width = 30,
-      hide_root_folder = true,
+      hide_root_folder = false,
       preserve_window_proportions = true,
     },
     git = {
-      enable = false,
+      enable = true,
       ignore = true,
     },
     filesystem_watchers = {
@@ -35,7 +31,7 @@ return {
       },
     },
     renderer = {
-      highlight_git = false,
+      highlight_git = true,
       highlight_opened_files = "none",
 
       indent_markers = {
@@ -47,7 +43,7 @@ return {
           file = true,
           folder = true,
           folder_arrow = true,
-          git = false,
+          git = true,
         },
 
         glyphs = {
