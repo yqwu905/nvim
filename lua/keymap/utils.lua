@@ -23,10 +23,15 @@ function utils.async_run_code()
   local function is_run_script(path)
     return string.match(path, "_nvim_run_?.*%.ps1")
   end
-  local run_scripts = vim.fs.find(is_run_script, { path = vim.fn.getcwd(), type = "file", limit = 20 })
+  local run_scripts = {}
+  for file in vim.fs.dir(vim.fn.getcwd()) do
+    if is_run_script(file) then
+      table.insert(run_scripts, file)
+    end
+  end
   if #run_scripts > 0 then
     if #run_scripts == 1 then
-      require("toggleterm").exec(run_scripts[1] .. " " .. vim.fn.expand "%:t")
+      require("toggleterm").exec(".\\" .. run_scripts[1] .. " " .. vim.fn.expand "%:t")
     else
       vim.ui.select(run_scripts, {
         prompt = "Choose run script",
@@ -42,7 +47,7 @@ function utils.async_run_code()
           vim.notify "Abort run"
           return
         end
-        require("toggleterm").exec(choice .. " " .. vim.fn.expand "%:t")
+        require("toggleterm").exec(".\\" .. choice .. " " .. vim.fn.expand "%:t")
       end)
     end
   elseif utils.runner[vim.bo.filetype] ~= nil then
@@ -152,4 +157,3 @@ function utils.pandoc_export()
 end
 
 return utils
-
