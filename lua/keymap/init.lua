@@ -51,18 +51,14 @@ wk.register {
       },
       ["g"] = {
         b = { "<cmd>lua require'gitsigns'.blame_line{full=true}<cr>", "git blame" },
+        c = { "<cmd>Git commit<cr>", "git commit" },
+        g = { "<cmd>Git<cr>", "git" },
         h = { "<cmd>Telescope git_commits<cr>", "git history" },
         j = { "<cmd>Gitsigns next_hunk<cr>", "next hunk" },
         k = { "<cmd>Gitsigns prev_hunk<cr>", "previous hunk" },
+        l = { "<cmd>Git log --oneline<cr>", "git log" },
         p = { "<cmd>Gitsigns preview_hunk<cr>", "git preview" },
         s = { "<cmd>:Gitsigns stage_hunk<cr>", "git stage" },
-        l = {
-          name = "+glance",
-          d = { "<cmd>Glance definitions<cr>", "definitions" },
-          r = { "<cmd>Glance references<cr>", "references" },
-          t = { "<cmd>Glance type_definitions<cr>", "type definitions" },
-          i = { "<cmd>Glance implementations<cr>", "implementations" },
-        },
       },
       ["h"] = {
         l = { utils.highlightWord, "highlight" },
