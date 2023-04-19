@@ -1,13 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
-  dependencies = {
-    { "nvim-telescope/telescope-project.nvim" },
-    {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-    },
-  },
+  dependencies = {},
   config = function()
     local telescope = require "telescope"
     local actions = telescope.actions
@@ -59,18 +53,10 @@ return {
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
       },
-      extensions = {
-        project = {},
-        fzf = {
-          fuzzy = true, -- false will only do exact matching
-          override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-        },
-      },
+      extensions = {},
     }
 
-    local extensions = { "project", "fzf" }
+    local extensions = {}
 
     pcall(function()
       for _, ext in ipairs(extensions) do
