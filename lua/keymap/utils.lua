@@ -156,4 +156,39 @@ function utils.pandoc_export()
   end)
 end
 
+local wordHighlightColors = { "#2e7de9", "#587539", "#b15c00", "#9854f1", "#f52a65", "#2496ac", "#000000", "#ffffff" }
+utils.highlightedWords = {}
+utils.wordHighlight = {}
+utils.currentHighlightWordsNum = 0
+
+for i = 1, #wordHighlightColors do
+  vim.api.nvim_set_hl(0, string.format("wordHighlight%d", i), { bg = wordHighlightColors[i] })
+  table.insert(utils.wordHighlight, { word = nil, color = wordHighlightColors[i] })
+end
+
+function utils.highlightWord()
+  local cword = vim.fn.expand "<cword>"
+  local highlighted = nil
+  local first_useable_color = nil
+  for i = 1, #utils.wordHighlight do
+    if utils.wordHighlight[i]["word"] == cword then
+      highlighted = i
+      break
+    end
+  end
+  for i = 1, #utils.wordHighlight do
+    if utils.wordHighlight[i]["word"] == nil then
+      first_useable_color = i
+    end
+  end
+  if highlighted then
+    vim.cmd(string.format("syntax clear myWordHighlight%d", highlighted))
+    utils.wordHighlight[highlighted]["word"] = nil
+  elseif first_useable_color then
+    utils.wordHighlight[first_useable_color]["word"] = cword
+    vim.cmd(string.format("syntax keyword myWordHighlight%d %s", first_useable_color, cword))
+    vim.cmd(string.format("hi link myWordHighlight%d wordHighlight%d", first_useable_color, first_useable_color))
+  end
+end
+
 return utils

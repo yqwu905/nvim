@@ -64,7 +64,9 @@ wk.register {
           i = { "<cmd>Glance implementations<cr>", "implementations" },
         },
       },
-      ["h"] = {},
+      ["h"] = {
+        l = { utils.highlightWord, "highlight" },
+      },
       ["i"] = {},
       ["j"] = {},
       ["k"] = {},
